@@ -16,7 +16,7 @@ users_collection = db["users"]
 
 @app.route('/', methods=['GET'])
 def documentation():
-    return {"hello world"}
+    return {"message": "Username and password are required"} ,200
 
 class UserRegistration(Resource):
     def post(self):
