@@ -1,16 +1,22 @@
 from flask import Flask, request
 from flask_restful import Api, Resource
+from flask_cors import CORS  # Import the CORS module
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)  # Enable CORS for all routes
 
 # MongoDB configuration
 client = MongoClient("mongodb://localhost:27017/")
 db = client["user_db"]
 users_collection = db["users"]
+
+@app.route('/', methods=['GET'])
+def documentation():
+    return {"hello world"}
 
 class UserRegistration(Resource):
     def post(self):
@@ -58,4 +64,4 @@ api.add_resource(UserRegistration, '/register')
 api.add_resource(UserAuthentication, '/authenticate')
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0",port=6667)
+    app.run(debug=True,host="0.0.0.0",port=2020)
