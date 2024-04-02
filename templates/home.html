@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h3 class="center-align">Welcome to the Dashboard</h3>
+
+        {% if current_user %}
+            <p class="center-align">Hello, {{ current_user.username }}!</p>
+            <a class="waves-effect waves-light btn" href="{{ url_for('create_graph') }}">Create Graph</a>
+        {% else %}
+            <p class="flow-text center-align">You are not logged in. Please <a href="{{ url_for('login') }}">login</a>.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
