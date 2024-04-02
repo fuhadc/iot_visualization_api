@@ -1,0 +1,43 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Visualization Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to the IoT Visualization Dashboard</h1>
+    <p>User ID: {{ user_id }}</p>
+    
+    <button id="createGraphBtn">Create Graph</button>
+
+    <script>
+        document.getElementById('createGraphBtn').addEventListener('click', function() {
+            var graphName = prompt("Enter graph name:");
+            var paramName = prompt("Enter parameter name:");
+
+            if (graphName !== null && paramName !== null) {
+                // Use AJAX or other methods to send graph details to the server
+                fetch(`/dashboard/{{ user_id }}/create-graph`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        graph_name: graphName,
+                        param_name: paramName
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
